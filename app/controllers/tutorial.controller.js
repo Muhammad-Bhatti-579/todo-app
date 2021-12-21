@@ -1,19 +1,54 @@
 const db = require("../models");
 const Tutorial = db.tutorials;
 
+// // Create and Save a new Tutorial
+// exports.create = (req, res) => {
+//   // Validate request
+//   if (!req.body.title) {
+//     res.status(400).send({ message: "Content can not be empty!" });
+//     return;
+//   }
+
+//   // Create a Tutorial
+//   const tutorial = new Tutorial({
+//     title: req.body.title,
+//     description: req.body.description,
+//     published: req.body.published ? req.body.published : false
+//   });
+
+//   // Save Tutorial in the database
+//   tutorial
+//     .save(tutorial)
+//     .then(data => {
+//       res.send(data);
+//     })
+//     .catch(err => {
+//       res.status(500).send({
+//         message:
+//           err.message || "Some error occurred while creating the Tutorial."
+//       });
+//     });
+// };
+
+
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.title) {
+  (console.log(req.body));
+  if (!req.body.Name) {
     res.status(400).send({ message: "Content can not be empty!" });
     return;
   }
 
   // Create a Tutorial
   const tutorial = new Tutorial({
-    title: req.body.title,
-    description: req.body.description,
-    published: req.body.published ? req.body.published : false
+    Name: req.body.Name,
+    DOB: req.body.DOB,
+    Balance: req.body.Balance,
+    Status: req.body.Status,
+    Type: req.body.Type,
+    ImageURL: req.body.ImageURL
+
   });
 
   // Save Tutorial in the database
@@ -25,7 +60,7 @@ exports.create = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the Tutorial."
+          err.message || "Some error occurred while creating the Customer."
       });
     });
 };
@@ -112,6 +147,8 @@ exports.delete = (req, res) => {
     });
 };
 
+
+
 // Delete all Tutorials from the database.
 exports.deleteAll = (req, res) => {
   Tutorial.deleteMany({})
@@ -128,7 +165,7 @@ exports.deleteAll = (req, res) => {
     });
 };
 
-// Find all published Tutorials
+//Find all published Tutorials
 exports.findAllPublished = (req, res) => {
   Tutorial.find({ published: true })
     .then(data => {
@@ -141,3 +178,18 @@ exports.findAllPublished = (req, res) => {
       });
     });
 };
+
+
+// exports.findAllActive = (req,res) =>{
+//   Tutorial.find({ Account_Status: "active"})
+//   .then(data => {
+//     res.send(data);
+//   })
+//   .catch(err => {
+//     res.status(500).send({
+//       message:
+//       err.message || "Some error"
+//     });
+//   });
+
+// }

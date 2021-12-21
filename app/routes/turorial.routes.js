@@ -8,13 +8,13 @@ module.exports = app => {
   router.post("/", tutorials.create); 
 
   // Retrieve all Tutorials
-  router.get("/tutorials", tutorials.findAll);
+  router.get("/customers", tutorials.findAll);
 
   // Retrieve all published Tutorials
   router.get("/published", tutorials.findAllPublished);
 
   // Retrieve a single Tutorial with id
-  router.get("/:id", tutorials.findOne);
+  router.get("/customers/:id", tutorials.findOne);
 
   // Update a Tutorial with id
   router.put("/:id", tutorials.update);

@@ -1,5 +1,6 @@
 const express = require("express");
 const http = require("http");
+const path = require("path");
 // const bodyParser = require("body-parser"); /* deprecated */
 const cors = require("cors");
 
@@ -34,6 +35,9 @@ db.mongoose
   });
 
 // // simple route
+
+app.use('/', express.static(path.join(__dirname, 'app')))
+
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to the Express Server. Serving MongoDB since 2021" });
 });

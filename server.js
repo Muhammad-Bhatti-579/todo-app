@@ -1,11 +1,8 @@
 const express = require("express");
-const http = require("http");
-const path = require("path");
 // const bodyParser = require("body-parser"); /* deprecated */
 const cors = require("cors");
 
 const app = express();
-const server = http.Server(app);
 
 var corsOptions = {
   origin: "*"
@@ -35,9 +32,6 @@ db.mongoose
   });
 
 // // simple route
-
-app.use('/', express.static(path.join(__dirname, 'app')))
-
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to the Express Server. Serving MongoDB since 2021" });
 });
@@ -47,6 +41,6 @@ require("./app/routes/turorial.routes")(app);
 console.log("server.js")
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
-server.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });

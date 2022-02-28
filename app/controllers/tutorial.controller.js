@@ -1,3 +1,4 @@
+const { redirect } = require("express/lib/response");
 const db = require("../models");
 const Tutorial = db.tutorials;
 
@@ -7,19 +8,17 @@ const Tutorial = db.tutorials;
 exports.create = (req, res) => {
   // Validate request
   (console.log(req.body));
-  if (!req.body.Name) {
+  if (!req.body.Title) {
     res.status(400).send({ message: "Content can not be empty!" });
     return;
   }
 
   // Create a Tutorial
   const tutorial = new Tutorial({
-    Name: req.body.Name,
-    DOB: req.body.DOB,
-    Balance: req.body.Balance,
-    Status: req.body.Status,
-    Type: req.body.Type,
-    ImageURL: req.body.ImageURL
+    Title: req.body.Title,
+    Description: req.body.Description,
+    Priority: req.body.Priority,
+    Completed: req.body.Completed
 
   });
 
@@ -87,7 +86,7 @@ exports.update = (req, res) => {
         res.status(404).send({
           message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found!`
         });
-      } else res.send({ message: "Tutorial was updated successfully." });
+      } else res.send({ message: "Task was updated successfully." });
     })
     .catch(err => {
       res.status(500).send({
